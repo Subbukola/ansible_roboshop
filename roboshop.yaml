@@ -31,6 +31,6 @@
       register: ec2_output
 
     # printing output of ec2
-    - name:
+    - name: printing output
       ansible.builtin.debug:
         msg: {{ ec2_output }}
