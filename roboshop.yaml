@@ -10,6 +10,7 @@
     instances: 
       - mongodb
       - catalogue
+    domain_name: kola88.online
 
 
   tasks:
