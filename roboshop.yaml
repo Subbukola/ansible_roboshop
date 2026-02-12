@@ -82,7 +82,7 @@
       loop: "{{ instances }}"
       when:
         - action == "destroy"
-        - item == "frontned"
+        - item == "frontend"
 
 
     # delete route 53 records
