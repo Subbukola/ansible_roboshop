@@ -10,6 +10,7 @@
     instances: 
       - mongodb
       - catalogue
+      - payment
     domain_name: kola88.online
 
 
@@ -26,8 +27,6 @@
           Component: "{{ item }}"
           Environment: "{{ env }}"
           Name: "{{ item }}-{{ env }}"
-
-
       loop: "{{ instances }}"
       register: ec2_output
 
@@ -40,12 +39,10 @@
       amazon.aws.route53:
         state: present
         zone: "{{ domain_name }}"
-        record: "roboshop-{{ env }}.{{ domain_name }}" # roboshop-dev.daws88s.online
+        record: "{{ item.item }}-{{ env }}.{{ domain_name }}" # roboshop-dev.daws88s.online
         type: A
         ttl: 1
-        value: "{{ item.instances[0].public_ip_address }}"
+        value: "{{ item.instances[0].private_ip_address }}"
         wait: true
       loop: "{{ ec2_output.results }}"
-      # when:  # and
-      # - item.item == "frontend"
       # - action == "create"
