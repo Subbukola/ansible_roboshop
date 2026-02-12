@@ -53,7 +53,7 @@
       when: action == "create"
 
     # create route 53 frontend
-    - name: create r53 records
+    - name: create r53 frontend record
       amazon.aws.route53:
         state: present
         zone: "{{ domain_name }}"
