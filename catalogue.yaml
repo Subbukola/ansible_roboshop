@@ -34,10 +34,10 @@
       path: /app
       state: directory
 
-  # - name: delete zip file
-  #   ansible.builtin.file:
-  #     src: /tmp/catalogue.zip
-  #     state: absent
+  - name: delete zip file
+    ansible.builtin.file:
+      src: /tmp/catalogue.zip
+      state: absent
 
   - name: downloading zip file
     ansible.builtin.uri:
