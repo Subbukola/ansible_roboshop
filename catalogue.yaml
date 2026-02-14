@@ -60,10 +60,10 @@
       src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
 
-  - name: copying catalogue service
+  - name: copying mongo.repo
     ansible.builtin.copy:
-      src: mongo.repo
-      dest: /etc/yum.repos.d/mongo.repo
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongodb.repo
 
   - name: installing mongodb-mongosh
     ansible.builtin.dnf:
