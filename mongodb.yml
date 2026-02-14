@@ -39,3 +39,4 @@
   #     name: mongod 
   #     state: restarted
 
+# after running mongodb.yml try to check  nc -zv mongodb-dev.kola88.online 27017 to see status
