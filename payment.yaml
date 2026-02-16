@@ -1,6 +1,6 @@
 ---
 - name: payment service 
-  hosts: Payment
+  hosts: payment
   become: yes
 
   tasks:
@@ -62,7 +62,7 @@
 
   - name: starting and enabling 
     ansible.builtin.service:
-      name: Payment
+      name: payment
       state: restarted
       enabled: true
 
