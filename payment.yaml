@@ -5,8 +5,7 @@
 
   tasks:
 
-  - name: 
-    - name: install dependencies
+  - name: install dependencies
     ansible.builtin.dnf:
       name: "{{ item }}"
       state: present
