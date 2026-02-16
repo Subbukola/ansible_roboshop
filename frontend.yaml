@@ -25,7 +25,7 @@
   - name: creating /usr/share/nginx/html/* directory 
     ansible.builtin.file:
       path: /usr/share/nginx/html/*
-      state: present
+      state: directory
 
 
 
@@ -49,8 +49,6 @@
     ansible.builtin.template:
       src: nginx.conf
       dest: /etc/nginx/nginx.conf
-
-
 
   - name: enabling and starting nginx
     ansible.builtin.service:
