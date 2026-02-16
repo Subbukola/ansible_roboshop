@@ -1,6 +1,6 @@
 ---
 - name: payment service 
-  hosts: payment
+  hosts: Payment
   become: yes
 
   tasks:
