@@ -49,12 +49,17 @@
       dest: /app
       remote_src: yes
 
-  - name: 
+  - name: install dependencies 
     ansible.builtin.pip:
       requirements: requirements.txt
       executable: pip3.9
     args:
       chdir: /app 
+
+  - name: copy payment service
+    ansible.builtin.template:
+      src: payment.service
+      dest: /etc/systemd/system/payment.service
 
   - name: Reload systemd daemon
     ansible.builtin.systemd_service:
