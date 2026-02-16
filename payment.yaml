@@ -57,7 +57,7 @@
       chdir: /app 
 
   - name: Reload systemd daemon
-    ansible.builtin.systemd:
+    ansible.builtin.systemd_service:
       daemon_reload: true
 
   - name: starting and enabling 
