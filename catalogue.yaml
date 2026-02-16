@@ -56,7 +56,7 @@
       path: /app
 
   - name: copying catalogue service
-    ansible.builtin.copy:
+    ansible.builtin.template:
       src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
 
