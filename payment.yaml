@@ -1,5 +1,6 @@
 ---
-- hosts: payment
+- name: payment service 
+  hosts: payment
   become: yes
 
   tasks:
@@ -48,3 +49,22 @@
       src: /tmp/payment.zip
       dest: /app
       remote_src: yes
+
+  - name: 
+    ansible.builtin.pip:
+      requirements: requirements.txt
+      executable: pip3.9
+    args:
+      chdir: /app 
+
+  - name: Reload systemd daemon
+    ansible.builtin.systemd:
+      daemon_reload: true
+
+  - name: starting and enabling 
+    ansible.builtin.service:
+      name: payment
+      state: restarted
+      enabled: true
+
+
