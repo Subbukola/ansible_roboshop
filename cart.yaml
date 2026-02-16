@@ -1,6 +1,6 @@
 ---
-- name: user configuration
-  hosts: user 
+- name: cart configuration
+  hosts: cart 
   become: yes
 
   tasks:
@@ -16,13 +16,13 @@
       name: nodejs 
       state: present
     
-  - name: adding roboshop user 
+  - name: adding roboshop cart
     ansible.builtin.user:
       name: roboshop
       home: /app
       shell: /sbin/nologin
       system: true
-      comment: "roboshop system user"
+      comment: "roboshop system cart"
 
   - name: deleting /app directory
     ansible.builtin.file:
@@ -36,17 +36,17 @@
 
   - name: delete zip file
     ansible.builtin.file:
-      path: /tmp/catalogue.zip
+      path: /tmp/cart.zip
       state: absent
 
   - name: downloading zip file
     ansible.builtin.uri:
-      url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
-      dest: /tmp/user.zip
+      url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
+      dest: /tmp/cart.zip
 
   - name: Unarchive a file that is already on the remote machine
     ansible.builtin.unarchive:
-      src: /tmp/user.zip
+      src: /tmp/cart.zip
       dest: /app
       remote_src: yes
 
@@ -55,15 +55,15 @@
     community.general.npm:
       path: /app
 
-  - name: copying user service
+  - name: copying cart service
     ansible.builtin.copy:
-      src: user.service 
-      dest: /etc/systemd/system/user.service
+      src: cart.service 
+      dest: /etc/systemd/system/cart.service
 
       
-  - name: start user
+  - name: start cart 
     ansible.builtin.service:
-      name: user 
+      name: cart  
       state: restarted
       enabled: yes
 

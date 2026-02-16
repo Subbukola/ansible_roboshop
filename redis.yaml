@@ -1,6 +1,36 @@
 ---
-- hosts: all
+- hosts: redis
   become: yes
 
   tasks:
+  - name: disabling redis 
+    ansible.builtin.command: dnf module disable redis -y
+
+  - name: enabling redis 
+    ansible.builtin.command: dnf module enable redis:7 -y
+
+  - name: installing redis 
+    ansible.builtin.dnf:
+      name: redis 
+      state: present
+
+  - name: updating IP address for redis 
+    ansible.builtin.replace:
+      path: /etc/redis/redis.conf
+      regexp: '127.0.0.1 '
+      replace: '0.0.0.0 '
+
   
+  - name: disable protected mode # to make it accept all ip's because using private network. if public and no security group,it's not good to disable protected mode
+    ansible.builtin.lineinfile:
+      path: /etc/redis/redis.conf
+      regexp: 'protected-mode'
+      line: 'protected-mode no'
+
+  - name: enabling redis and starting redis 
+    ansible.builtin.service: 
+      name: redis
+      state: restarted
+      enabled: yes
+
+
